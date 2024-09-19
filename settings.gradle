@@ -7,7 +7,6 @@ buildscript {
         classpath 'io.harness:gradle-cache:0.0.2'
     }
 }
-...
 
 // apply the plugin
 apply plugin: 'io.harness.gradle-cache'
