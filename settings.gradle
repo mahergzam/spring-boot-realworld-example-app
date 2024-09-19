@@ -1,0 +1,29 @@
+// import the plugin
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.harness:gradle-cache:0.0.2'
+    }
+}
+...
+
+// apply the plugin
+apply plugin: 'io.harness.gradle-cache'
+
+// build cache config
+
+buildCache {
+    local {
+        // Local build cache is dangerous as it might produce inconsistent results
+        // in case developer modifies files while the build is running
+        enabled = false
+    }
+    remote(io.harness.Cache) {
+        accountId = System.getenv('HARNESS_ACCOUNT_ID') 
+        token = System.getenv('HARNESS_PAT') 
+        push = "true"
+        endpoint = System.getenv('HARNESS_CACHE_SERVICE_ENDPOINT') 
+    }
+}
